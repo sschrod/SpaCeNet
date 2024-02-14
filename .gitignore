@@ -1,0 +1,7 @@
+*/__pycache__/*
+/data/*
+!/data/README.md
+!/data/simulated_data.pickle
+/results
+/sim_results
+

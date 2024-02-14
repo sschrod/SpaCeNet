@@ -1,0 +1,22 @@
+# docker build -t spacenet -f DOCKERFILE .
+FROM nvidia/cuda:11.7.1-cudnn8-runtime-ubuntu20.04
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.8-dev \
+    python3-pip \
+    libffi-dev \
+    build-essential \
+    rsync
+
+WORKDIR /mnt
+
+RUN pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+
+RUN pip3 install matplotlib~=3.7.1 \
+    networkx~=3.1 \
+    numba~=0.57.0 \
+    pandas~=2.0.2 \
+    scipy~=1.10.1 \
+    scikit-learn~=1.2.2 \
+    seaborn~=0.12.2 \
+    tqdm~=4.65.0

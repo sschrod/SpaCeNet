@@ -6,14 +6,37 @@ This package implements *SpaCeNet*. It is an extension of the traditional Gaussi
 You can either install the package directly from github via
 
 ```
-pip install git+https://gitlab.gwdg.de/MedBioinf/NetworkInference/SpaCeNet.git
+pip install git+https://github.com/sschrod/SpaCeNet.git
 ```
 
-or you can download the repository and run `pip install .` in its root directory.
+or use the provided `Docker` image
+```shell
+docker build -t spacenet -f DOCKERFILE .
+```
+SpaCeNet is implemented using PyTorch Tensors to facilitate efficient matrix computations on the GPU. Hence, we suggest setting up PyTorch with CUDA.
 
-## Usage
-The API is inspired by [scikit-learn](https://scikit-learn.org/) to achieve better usability. However, we use [pytorch](https://pytorch.org/)s  `torch.Tensor`s as data objects instead of `numpy.ndarray`s. This has the benefit that we can use cuda to speed up calculations.
 
-All function and class functionality is documented within the respective docstring.
+## Get started
+For a quick introduction we prepared a [jupyter notebook](https://github.com/sschrod/SpaCeNet/blob/master/example/quick_start.ipynb) demonstrating the inference of spatial relationships on simulated data with SpaCeNet.
 
-A jupyter notebook with a small demonstration is included in the `example` folder.
+The simplest way to analyse your own data using SpaCeNet is with `SpaCeNet_main.py`. Simply save the preprocessed data in a compressed numpy format
+```python
+np.savez(<file path>, X_mat=<Gene matrix (Sxnxp)>, coord_mat=<associated coordinates (Nxp)>, GeneNames=<List of Gene names (optional)>)
+```
+and call `SpaCeNet_main.py` with `--exp_name`, `--data_path`, `--preprocessed_data`, `--results_folder`. Further, set `-gs True` to run a grid-search, `-sr True` to run a single SpaCeNet model or `-ar True` for some general analysis.
+For the full list of argparse arguments refer to `SpaCeNet_main.py`
+
+To run a hyper-parameter search and analyse the findings on the simulated data run
+```shell
+python3 SpaCeNet_main.py --exp_name Simulation --data_path example --preprocessed_data simulated_data.pickle --results_folder sim_results/ -ss 1e-6 -e 1e-5 -l 3 -gs True -ar True
+```
+
+To reproduce the results on the MOSTA data, download the data (instructions in `\data`), run ```preprocess_MOSTA.py``` to save the preprocessed data and call
+```shell
+python3 SpaCeNet_main.py --exp_name MOSTA30 --data_path data --preprocessed_data MouseBrainAdult_30Percent.npz --results_folder results/ -nr 2 -st True -gs True -ar True```
+```
+
+## References
+Lück, N., Lohmayer, R., Solbrig, S., Schrod, S., Wipfler, T., Shutta, K.H., Guebila, M.B., Schäfer, A., Beißbarth, T., Zacharias, H.U. and Oefner, P.J., 2022. SpaCeNet: Spatial Cellular Networks from omics data. bioRxiv, pp.2022-09.
+
+
