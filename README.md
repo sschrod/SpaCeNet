@@ -37,6 +37,9 @@ python3 SpaCeNet_main.py --exp_name MOSTA30 --data_path data --preprocessed_data
 ```
 
 ## References
-Lück, N., Lohmayer, R., Solbrig, S., Schrod, S., Wipfler, T., Shutta, K.H., Guebila, M.B., Schäfer, A., Beißbarth, T., Zacharias, H.U. and Oefner, P.J., 2022. SpaCeNet: Spatial Cellular Networks from omics data. bioRxiv, pp.2022-09.
+Schrod, Stefan, et al. "Spatial Cellular Networks from omics data with SpaCeNet." Genome Research (2024): gr-279125.
+
+Schrod, Stefan, et al. "Spacenet: spatial cellular networks from omics data." International Conference on Research in Computational Molecular Biology. Cham: Springer Nature Switzerland, 2024.
+
 
 
